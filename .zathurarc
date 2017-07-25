@@ -1,0 +1,16 @@
+# colors
+#set statusbar-bg "#000000"
+#set statusbar-fg "#CC0000"
+#set default-fg "#FFFFFF"
+#set default-bg "#000000"
+
+# recolor
+set recolor true
+set recolor-darkcolor "#1234ab"
+set recolor-lightcolor "#fffaf0"
+
+set window-title-basename "true"
+set selection-clipboard "clipboard"
+
+# key mappings
+map ; focus_inputbar ":"

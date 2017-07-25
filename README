@@ -1,0 +1,5 @@
+source install_minimal.sh
+
+-or-
+
+sh uninstall_minimal.sh

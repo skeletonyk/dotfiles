@@ -1,0 +1,10 @@
+--recurse
+--tag-relative
+--exclude=.git
+--langdef=tex2
+--langmap=tex2:.tex
+--regex-tex2=/\\label[ \t]*\*?\{[ \t]*([^}]*)\}/\1/l,label/
+--langdef=markdown
+--langmap=markdown:.md
+--regex-markdown=/^#[ \t](.*$)/\1/h,heading,headings/
+--regex-markdown=/(<!--[ \t]*:[^ \t]+:[ \t]*-->)/\1/t,tag,tags/

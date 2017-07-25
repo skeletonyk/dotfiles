@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+	echo "usage: bs <scriptname>"
+	exit 1
+else
+	test -d $HOME/bin || mkdir $HOME/bin
+	$EDITOR $HOME/bin/$1 &&
+	chmod 744 $HOME/bin/$1
+fi

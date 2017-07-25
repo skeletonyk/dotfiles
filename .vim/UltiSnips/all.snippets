@@ -1,0 +1,12 @@
+# File:   all.snippets
+# Date:   Wed Jun 17 00:01:06 2015
+# Author: Fabian Wermelinger
+# Tag:    General Snippets
+# Copyright 2015 Fabian Wermelinger. All Rights Reserved.
+snippet now "Insert time and date"
+`!v strftime('%a %b %d %Y %r (%z)')`
+endsnippet
+
+snippet ic "Inline comment" i
+`!v CommentStart()`${VISUAL}$1`!v CommentEnd()`$0
+endsnippet

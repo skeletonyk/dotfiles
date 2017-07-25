@@ -1,0 +1,38 @@
+#!/bin/sh
+# ----------------------------------*- Sh -*-----------------------------------
+# Filename: flac2mp3
+# Description:
+# Author: Fabian Wermelinger
+# Email: fabianw@student.ethz.ch
+# Created: Sun Jun  3 16:46:47 2012 (+0200)
+# Version:
+# Last-Updated: Sun Jun  3 16:51:47 2012 (+0200)
+#           By: Fabian Wermelinger
+#     Update #: 2
+# -----------------------------------------------------------------------------
+# flac2mp3 starts here
+# -----------------------------------------------------------------------------
+
+if [ -n "$1" ]; then
+    DIR=$1
+else
+    DIR=.
+fi
+
+for a in *.flac; do
+    OUTF=$DIR/${a%.flac}.mp3
+
+    ARTIST=$(metaflac "$a" --show-tag=ARTIST | sed s/.*=//g)
+    TITLE=$(metaflac "$a" --show-tag=TITLE | sed s/.*=//g)
+    ALBUM=$(metaflac "$a" --show-tag=ALBUM | sed s/.*=//g)
+    GENRE=$(metaflac "$a" --show-tag=GENRE | sed s/.*=//g)
+    TRACKNUMBER=$(metaflac "$a" --show-tag=TRACKNUMBER | sed s/.*=//g)
+    DATE=$(metaflac "$a" --show-tag=DATE | sed s/.*=//g)
+
+    flac -c -d "$a" | lame -m j -q 0 --vbr-new -V 0 -s 44.1 - "$OUTF"
+    id3 -t "$TITLE" -T "${TRACKNUMBER:-0}" -a "$ARTIST" -A "$ALBUM" -y "$DATE" -g "${GENRE:-12}" "$OUTF"
+done
+
+# -----------------------------------------------------------------------------
+# flac2mp3 ends here
+# -----------------------------------------------------------------------------

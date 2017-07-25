@@ -1,0 +1,202 @@
+# vim: ft=tmux
+###########################
+#  Configuration
+###########################
+# OSX specific
+# set -g default-command "which reattach-to-user-namespace > /dev/null && reattach-to-user-namespace -l $SHELL || $SHELL -l"
+set -g default-command "reattach-to-user-namespace -l $SHELL"
+
+# use 256 term for pretty colors
+set -g default-terminal "screen-256color"
+
+# increase scroll-back history
+set -g history-limit 5000
+
+# use vim key bindings
+setw -g mode-keys vi
+
+# character set
+setw -g utf8 on
+
+# disable mouse
+setw -g mouse off
+
+# decrease command delay (increases vim responsiveness)
+set -sg escape-time 1
+
+# increase repeat time for repeatable commands
+set -g repeat-time 500
+
+# start window index at 1
+set -g base-index 1
+
+# start pane index at 1
+setw -g pane-base-index 1
+
+# highlight window when it has new activity
+setw -g monitor-activity on
+set -g visual-activity on
+
+# re-number windows when one is closed
+set -g renumber-windows on
+
+# diplay time
+set-option -g display-time 800
+set-option -g display-panes-time 2000
+
+# enable pbcopy and pbpaste
+# https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard/blob/master/README.md
+# set-option -g default-command "reattach-to-user-namespace -l zsh"
+
+###########################
+#  Key Bindings
+###########################
+
+# tmux prefix
+unbind C-b
+set -g prefix C-Space
+
+# copy with 'enter' or 'y' and send to mac os clipboard: http://goo.gl/2Bfn8
+# unbind -t vi-copy Enter
+# bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
+# bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+
+# use "v" and "s" to do vertical/horizontal splits, like vim
+unbind %
+unbind '"'
+bind C-s split-window -v
+bind C-v split-window -h
+
+unbind n
+unbind p
+bind -r n next-window
+bind -r p previous-window
+
+# copy / paste modes
+unbind [
+unbind ]
+bind C-[ copy-mode
+bind C-] paste-buffer
+
+# use the vim motion keys to move between panes
+unbind h
+unbind j
+unbind k
+unbind l
+bind -r C-h select-pane -L
+bind -r C-j select-pane -D
+bind -r C-k select-pane -U
+bind -r C-l select-pane -R
+
+# use the vim resize keys.
+unbind H
+unbind J
+unbind K
+unbind L
+bind -r H resize-pane -L 1
+bind -r J resize-pane -D 1
+bind -r K resize-pane -U 1
+bind -r L resize-pane -R 1
+
+# create 'v' alias for selecting text
+bind-key -t vi-copy v begin-selection
+bind-key -t vi-copy y copy-selection
+
+# create new window
+unbind c
+bind -r C-c new-window
+
+# paste
+unbind C-p
+bind C-p paste-buffer
+
+# quickly switch panes and client
+unbind C-b
+bind -r C-b select-pane -t :.+
+unbind B
+bind -r B switch-client -l
+bind-key 0 run "tmux split-window -l 12 'bash -ci ftpane'"
+bind-key - run "tmux split-window -l 12 'bash -ci fs'"
+
+# make layout toggle repeat
+unbind Space
+bind -r Space next-layout
+
+# force a reload of the config file
+unbind r
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+###########################
+# Status Bar
+###########################
+
+# enable UTF-8 support in status bar
+set -g status-utf8 on
+
+# set refresh interval for status bar
+set -g status-interval 5
+
+# center the status bar
+set -g status-justify left
+
+# show session, window, pane in left status bar
+set -g status-left-length 40
+set -g status-left '#[fg=green]#S#[fg=blue] #I:#P#[default] '
+
+# show hostname, date, time, and battery in right status bar
+set -g status-right-length 200
+# set-option -g status-right '#[fg=green]#H#[default] %m/%d/%y %I:%M #[fg=red]#(battery discharging)#[default]#(battery charging)'
+set -g status-right '#{prefix_highlight}#[default]#[fg=green]#H#[default] ✉ I.#{maildir_counter_1} E.#{maildir_counter_2} C.#{maildir_counter_3} | %a %Y-%m-%d %I:%M'
+
+###########################
+# Colors
+###########################
+
+# color status bar
+# set -g status-bg black
+set -g status-bg colour18
+set -g status-fg white
+
+# highlight current window
+set-window-option -g window-status-current-fg black
+set-window-option -g window-status-current-bg green
+
+# set color of active pane
+set -g pane-border-fg white
+set -g pane-border-bg black
+set -g pane-active-border-fg magenta
+set -g pane-active-border-bg black
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-maildir-counter'
+# set -g @plugin 'tmux-plugins/tmux-sessionist'
+set -g @plugin 'fab4100/tmux-sessionist'
+set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+set -g @plugin 'tmux-plugins/tmux-copycat'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-open'
+set -g @plugin 'tmux-plugins/tmux-urlview'
+# set -g @plugin 'tmux-plugins/tmux-sensible'
+
+# Other examples:
+# set -g @plugin 'github_username/plugin_name'
+# set -g @plugin 'git@github.com/user/plugin'
+# set -g @plugin 'git@bitbucket.com/user/plugin'
+
+# Plugin options
+# set -g @continuum-restore 'on'
+set -g @maildir_counters '~/Mail/current/INBOX/new|~/Mail/current/ethz/new|~/Mail/current/caltech/new'
+# set -g @resurrect-save 'S'
+# set -g @resurrect-restore 'R'
+set -g @resurrect-save '>'
+set -g @resurrect-restore '<'
+
+# unset some idiotic stuff
+unbind -T root N
+unbind -T root n
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'

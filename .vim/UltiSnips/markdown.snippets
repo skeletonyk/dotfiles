@@ -1,0 +1,35 @@
+# File       : markdown.snippets
+# Date       : Sun Feb 19 19:44:26 2017
+# Author     : Fabian Wermelinger
+# Description: markdown additional
+# Copyright 2017 Fabian Wermelinger. All Rights Reserved.
+priority 10
+
+snippet scan "Add a  relative link for scanned notes" i
+[Scan](../../media/scans/$1)$0
+endsnippet
+
+snippet sec "Section" b
+# ${1:Section Name}
+$0
+endsnippet
+
+snippet ssec "Sub Section" b
+## ${1:Section Name}
+$0
+endsnippet
+
+snippet sssec "SubSub Section" b
+### ${1:Section Name}
+$0
+endsnippet
+
+snippet par "Paragraph" b
+#### ${1:Paragraph Name}
+$0
+endsnippet
+
+snippet spar "Paragraph" b
+##### ${1:Paragraph Name}
+$0
+endsnippet

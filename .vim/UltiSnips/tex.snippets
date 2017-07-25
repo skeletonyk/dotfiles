@@ -1,0 +1,191 @@
+# my section indent (TeX-9)
+
+snippet /.*cha/ "Chapter" br
+\chapter{${1:chapter name}}
+	\label{cha:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${0}
+endsnippet
+
+snippet /.*sec/ "Section" br
+\section{${1:section name}}
+	\label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${0}
+endsnippet
+
+snippet /.*par/ "Paragraph" br
+\paragraph{${1:paragraph name}}
+	\label{par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${0}
+endsnippet
+
+snippet /.*part/ "Part" br
+\part{${1:part name}}
+	\label{part:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+	${0}
+endsnippet
+
+# snippet "be(gin)?( (\S+))?" "begin{} / end{}" br
+# \begin{${1:`!p
+# snip.rv = match.group(3) if match.group(2) is not None else "something"`}}
+# 	${2:${VISUAL}}
+# \end{$1}$0
+# endsnippet
+
+# math
+snippet mcal "Mathcal" i
+\mathcal{${VISUAL}$1}$0
+endsnippet
+snippet mrm "Math Roman" i
+\mathrm{${VISUAL}$1}$0
+endsnippet
+snippet mbb "Mathbb" i
+\mathbb{${VISUAL}$1}$0
+endsnippet
+snippet bvec "Vector, bold face" i
+\bvec{${VISUAL}$1}$0
+endsnippet
+snippet frac "Fraction" i
+\frac{${VISUAL}$1}{$2}$0
+endsnippet
+snippet lr( "left( right)" i
+\left(${1:${VISUAL}}\right)
+endsnippet
+snippet lr| "left| right|" i
+\left|${1:${VISUAL}}\right|
+endsnippet
+snippet lr{ "left\{ right\}" i
+\left\\{${1:${VISUAL}}\right\\}
+endsnippet
+snippet lr[ "left[ right]" i
+\left[${1:${VISUAL}}\right]
+endsnippet
+
+# textual
+snippet !""! "Quotation" ir
+\`\`${VISUAL}$1''$0
+endsnippet
+
+# references for omni-completion
+snippet ref "Simple reference" i
+\ref{$1}$0
+endsnippet
+snippet eref "Equation reference" i
+\eqref{$1}$0
+endsnippet
+snippet figure "Fixed figure reference" i
+Figure~\ref{$1}$0
+endsnippet
+snippet table "Fixed table reference" i
+Table~\ref{$1}$0
+endsnippet
+snippet listing "Fixed listing reference" i
+Listing~\ref{$1}$0
+endsnippet
+snippet chapter "Fixed chapter reference" i
+Chapter~\ref{$1}$0
+endsnippet
+snippet section "Fixed section reference" i
+Section~\ref{$1}$0
+endsnippet
+snippet page "Fixed page reference" i
+page~\pageref{$1}$0
+endsnippet
+
+# type faces redefined
+snippet it "Italics" i
+\textit{${VISUAL}$1}$0
+endsnippet
+snippet bf "Bold face" i
+\textbf{${VISUAL}$1}$0
+endsnippet
+snippet emp "Emphasize" i
+\emph{${VISUAL}$1}$0
+endsnippet
+snippet sc "Small caps" i
+\textsc{${VISUAL}$1}$0
+endsnippet
+snippet sf "Sans" i
+\textsf{${VISUAL}$1}$0
+endsnippet
+snippet rm "Roman" i
+\textrm{${VISUAL}$1}$0
+endsnippet
+snippet tt "Typewriter" i
+\texttt{${VISUAL}$1}$0
+endsnippet
+
+# citation
+snippet citen "Numerical citation" i
+\citen{$1}$0
+endsnippet
+snippet citep "Parenthical ciattaion" i
+\citep{$1}$0
+endsnippet
+snippet citet "Textual citation" i
+\citet{$1}$0
+endsnippet
+snippet cite "Default citation" i
+\cite{$1}$0
+endsnippet
+snippet citea "Only cite author" i
+\citeauthor{$1}$0
+endsnippet
+snippet citey "Only cite year" i
+\citeyear{$1}$0
+endsnippet
+snippet fcite "Footnote citation" i
+\footcite{$1}$0
+endsnippet
+
+# other
+snippet ft "Footnote" i
+\footnote{${VISUAL}$1}$0
+endsnippet
+
+snippet ite "Individual item" b
+\item${VISUAL}${1}
+endsnippet
+
+# refined environments
+snippet tab "Table environment" b
+\begin{table}${3:[htpb]}
+	\begin{${4:t}${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${5:c}}
+		$0${5/((?<=.)c|l|r)|./(?1: & )/g}
+	\end{$4${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}
+	\caption{$1}
+	\label{tab:$2}
+\end{table}
+endsnippet
+
+# subfigure
+snippet subfig "Subfigure environment" b
+\begin{figure}[${1:htbp}]
+	\centering
+	\begin{subfigure}[${2:tcb}]{${3:0.48\textwidth}}
+		\centering
+		\input{$0}
+		\caption{}
+		\label{}
+	\end{subfigure}%
+	% add desired spacing between images, e. g. ~, \quad, \qquad etc. (or a blank
+	% line to force the subfigure onto a new line)
+	${4:\hfill}
+	\begin{subfigure}[$2]{$3}
+		\centering
+		\input{}
+		\caption{}
+		\label{}
+	\end{subfigure}
+	\caption{}
+	\label{}
+\end{figure}
+endsnippet
+
+# nomenclature
+snippet nomen "Insert nomenclature command" b
+\nomenclature[${1:order tag}]{${2:symbol}}{${3:description}${4:\nomunit{${5:unit}}}}$0
+endsnippet

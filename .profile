@@ -1,0 +1,40 @@
+# ~/.profile: executed by the command interpreter for login shells.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
+# exists.
+# see /usr/share/doc/bash/examples/startup-files for examples.
+# the files are located in the bash-doc package.
+
+# the default umask is set in /etc/profile; for setting the umask
+# for ssh logins, install and configure the libpam-umask package.
+#umask 022
+
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
+    fi
+fi
+
+# this is done in .bashrc already
+# # set PATH so it includes user's private bin if it exists
+# if [ -d "$HOME/bin" ] ; then
+#     PATH="$HOME/bin:$PATH"
+# fi
+
+# export LOCAL=$HOME/local
+# export PATH=$LOCAL/bin:$PATH
+# emacs --daemon &
+# conky_delayed 16 &
+# xmodmap $HOME/.Xmodmap &
+# fetchmail &
+# sleep 20 && python $HOME/bin/maildir-indicator.py &
+
+##
+# Your previous /Users/fabs/.profile file was backed up as /Users/fabs/.profile.macports-saved_2015-05-27_at_14:51:26
+##
+
+# MacPorts Installer addition on 2015-05-27_at_14:51:26: adding an appropriate PATH variable for use with MacPorts.
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+# Finished adapting your PATH environment variable for use with MacPorts.
+

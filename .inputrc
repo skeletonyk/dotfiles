@@ -1,0 +1,19 @@
+# File       : .inputrc
+# Date       : Fri Sep 30 09:16:47 2016
+# Author     : Fabian Wermelinger
+# Description: Readline config
+# Copyright 2016 ETH Zurich. All Rights Reserved.
+set editing-mode vi
+
+# set keymap vi-command
+
+# set keymap vi-move
+
+set keymap vi-insert
+Control-p: history-search-backward
+Control-n: history-search-forward
+Control-l: clear-screen
+
+set show-mode-in-prompt on
+set vi-ins-mode-string +
+set vi-cmd-mode-string :

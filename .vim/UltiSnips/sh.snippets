@@ -1,0 +1,20 @@
+# File       : sh.snippets
+# Date       : Wed Nov 23 20:41:09 2016
+# Author     : Fabian Wermelinger
+# Description: sh snippets
+# Copyright 2016 Fabian Wermelinger. All Rights Reserved.
+priority 10
+
+snippet sh "simple sh" b
+#!/usr/bin/env sh$0
+endsnippet
+
+snippet bash "simple bash" b
+#!/usr/bin/env bash$0
+endsnippet
+
+snippet sbash "whut's this?" b
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'$0
+endsnippet
