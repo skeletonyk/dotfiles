@@ -93,7 +93,7 @@ if &t_Co > 2 || has("gui_running")
     set foldlevel=0
 
     set background=dark
-    "let base16colorspace=256
+    let base16colorspace=256
     " colorscheme base16-eighties
     colorscheme base16-monokai
 endif
