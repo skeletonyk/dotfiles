@@ -89,7 +89,6 @@ if &t_Co > 2 || has("gui_running")
     " new Ke
     filetype plugin indent on
     syntax on
-    let anyfold_activate=1
     set foldlevel=0
 
     set background=dark

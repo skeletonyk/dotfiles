@@ -1,0 +1,1 @@
+/jet/home/kyu2/.rc/.vim

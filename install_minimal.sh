@@ -117,8 +117,8 @@ check_install_tarball_default 'http://ftp.gnu.org/gnu/autoconf' 'autoconf-2.69'
 check_install_tarball_default 'http://mirror.switch.ch/ftp/mirror/gnu/automake' 'automake-1.15'
 check_install_tarball_default 'ftp://ftp.gnu.org/gnu/libtool' 'libtool-2.4.6'
 check_install_tarball_default 'http://pkgconfig.freedesktop.org/releases' 'pkg-config-0.29' --with-internal-glib
-check_install_tarball_default 'http://mirror.switch.ch/ftp/mirror/gnu/m4' 'm4-1.4.17'
-check_install_tarball_default 'ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre' 'pcre-8.39'
+#check_install_tarball_default 'http://mirror.switch.ch/ftp/mirror/gnu/m4' 'm4-1.4.17'
+#check_install_tarball_default 'ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre' 'pcre-8.39'
 
 # install recent git
 [[ "$($GIT --version)" =~ ([0-9][.][0-9]*) ]] && version="${BASH_REMATCH[1]}"
